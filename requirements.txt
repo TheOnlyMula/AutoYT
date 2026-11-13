@@ -1,0 +1,8 @@
+# Requires Python 3.10-3.12 (kokoro does not support 3.13+)
+beautifulsoup4==4.15.0
+demoji==2.0.0
+kokoro==0.9.4
+moviepy==2.2.1
+numpy==2.5.4
+requests==2.34.2
+soundfile==0.14.0

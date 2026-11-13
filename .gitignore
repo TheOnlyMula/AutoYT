@@ -1,5 +1,6 @@
 .venv
 .vscode
-test/
-*.mp3
+demo/
+*.wav
+*.mp4
 __pycache__/ 
