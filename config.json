@@ -1,0 +1,16 @@
+{
+    "voice": "af_heart",
+    "speed": 1.0,
+    "gameplay_path": "assets/minecraftparkourgameplay.mp4",
+    "input": "input.txt",
+    "output": "output.mp4",
+    "padding": 1,
+    "words_per_caption": 3,
+    "font": {
+        "path": "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        "size": 110,
+        "color": "white",
+        "stroke_color": "black",
+        "stroke_width": 0
+    }
+}

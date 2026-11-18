@@ -1,0 +1,142 @@
+{
+    "af_heart": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "A"
+    },
+    "af_alloy": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "C"
+    },
+    "af_aoede": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "C+"
+    },
+    "af_bella": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "A-"
+    },
+    "af_jessica": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "D"
+    },
+    "af_kore": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "C+"
+    },
+    "af_nicole": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "B-"
+    },
+    "af_nova": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "C"
+    },
+    "af_river": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "D"
+    },
+    "af_sarah": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "C+"
+    },
+    "af_sky": {
+        "gender": "female",
+        "accent": "American English",
+        "grade": "C-"
+    },
+    "am_adam": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "F+"
+    },
+    "am_echo": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "D"
+    },
+    "am_eric": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "D"
+    },
+    "am_fenrir": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "C+"
+    },
+    "am_liam": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "D"
+    },
+    "am_michael": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "C+"
+    },
+    "am_onyx": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "D"
+    },
+    "am_puck": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "C+"
+    },
+    "am_santa": {
+        "gender": "male",
+        "accent": "American English",
+        "grade": "D-"
+    },
+    "bf_alice": {
+        "gender": "female",
+        "accent": "British English",
+        "grade": "D"
+    },
+    "bf_emma": {
+        "gender": "female",
+        "accent": "British English",
+        "grade": "B-"
+    },
+    "bf_isabella": {
+        "gender": "female",
+        "accent": "British English",
+        "grade": "C"
+    },
+    "bf_lily": {
+        "gender": "female",
+        "accent": "British English",
+        "grade": "D"
+    },
+    "bm_daniel": {
+        "gender": "male",
+        "accent": "British English",
+        "grade": "D"
+    },
+    "bm_fable": {
+        "gender": "male",
+        "accent": "British English",
+        "grade": "C"
+    },
+    "bm_george": {
+        "gender": "male",
+        "accent": "British English",
+        "grade": "C"
+    },
+    "bm_lewis": {
+        "gender": "male",
+        "accent": "British English",
+        "grade": "D+"
+    }
+}

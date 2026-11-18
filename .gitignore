@@ -1,6 +1,4 @@
 .venv
-.vscode
-demo/
-*.wav
 *.mp4
 __pycache__/ 
+input.txt
