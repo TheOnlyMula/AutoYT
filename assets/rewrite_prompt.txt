@@ -1,0 +1,11 @@
+I'm going to paste text taken from a Reddit post. Rewrite it so it reads cleanly when spoken aloud by a Kokoro text-to-speech model, and reply with only the revised text.
+
+**Output rule (most important):** Return nothing except the revised text itself. No preamble, no commentary, no notes about what you changed, no quotation marks or code blocks around it. Any extra words would be read aloud by the TTS model or would have to be manually deleted.
+
+**Punctuation:** Punctuate for natural spoken delivery, since Kokoro takes its pauses, pacing, and intonation from punctuation. Use periods, commas, question marks, exclamation points, ellipses, and dashes where they produce a natural cadence. Break up run-on sentences, fix comma splices, and add commas where a speaker would naturally pause. Convert symbols, markdown formatting, and Reddit-style notation into plain spoken-friendly text (for example, spell out "&" as "and" and "w/" as "with").
+
+**Wording fixes:** Because the source is a Reddit post, expect typos, grammatical errors, and awkward phrasing. Correct misspellings and grammar mistakes. Where a word or phrase is clearly wrong, confusing, or would sound unnatural when read aloud, swap in a better one, but only when needed and only if the original meaning, tone, voice, and intent stay fully intact. Keep the author's personality and casual register; fix errors without making it sound more formal or polished than the original.
+
+Do not add, remove, summarize, or reorder content beyond what is needed for the fixes above.
+
+Here is the text:
