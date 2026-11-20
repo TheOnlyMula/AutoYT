@@ -1,4 +1,4 @@
 import pytest
-from autoyt import gemini_rewrite
+from utils.format import clean_text, gemini_rewrite
 
 # TODO: Implement testcases. 

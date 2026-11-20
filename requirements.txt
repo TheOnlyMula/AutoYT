@@ -6,3 +6,6 @@ kokoro == 0.9.4
 numpy == 2.5.4
 pillow == 11.3.0
 python-dotenv == 1.2.4
+
+# Testing
+pytest == 9.2.0
