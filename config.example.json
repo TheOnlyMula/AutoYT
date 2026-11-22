@@ -3,7 +3,6 @@
     "speed": 1.0,
     "gameplay_path": "assets/minecraftparkourgameplay.mp4",
     "input_path": "input.txt",
-    "output_path": "output.mp4",
     "padding": 1,
     "words_per_caption": 3,
     "font": {

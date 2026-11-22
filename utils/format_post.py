@@ -2,6 +2,7 @@ import os
 import re 
 import demoji
 import json
+from pydantic import BaseModel, Field
 
 from dotenv import load_dotenv
 load_dotenv() 
@@ -14,21 +15,26 @@ with open("assets/rewrite_prompt.txt") as f:
 from google import genai
 client = genai.Client(api_key = os.getenv("GEMINI_API_KEY"))
 
+class Post(BaseModel): 
+    title: str = Field(description = "Engaging title to draw attention to the post.")
+    body: str = Field(description = "Body of the post.")
+
 def gemini_rewrite(post): 
     interaction = client.interactions.create(
-        model = "gemini-3.5-flash-lite", 
-        input = f"{REWRITE_PROMPT}\n{post}"
+            model = "gemini-3.5-flash-lite", 
+            input = f"{REWRITE_PROMPT}\n{post}", 
+            response_format = { 
+                "type": "text", 
+                "mime_type": "application/json", 
+                "schema": Post.model_json_schema() 
+            }
         )
     return interaction.output_text
 
-def format_text(text: str) -> str:
-    if not text:
-        return ""
-
-    return gemini_rewrite(clean_text(text))
+def format_text(text: str) -> Post:
+    return Post.model_validate_json(gemini_rewrite(clean_text(text)))
 
 def clean_text(text: str) -> str:
-    """Strips Reddit formatting and expands acronyms and emoji. Makes no API calls."""
     if not text:
         return ""
 

@@ -2,11 +2,11 @@
 
 AutoYT turns a Reddit post into a narrated short-form video. A text-to-speech voice reads the post aloud while word-timed captions play over background gameplay footage.
 
-Speech is generated locally with [Kokoro](https://github.com/hexgrad/kokoro), an open-weight text-to-speech model, and the video is put together with [ffmpeg](https://ffmpeg.org). Before narration, the post is sent to Google's Gemini API to fix typos and grammar.
+Speech is generated locally with [Kokoro](https://github.com/hexgrad/kokoro), an open-weight text-to-speech model, and the video is put together with [ffmpeg](https://ffmpeg.org). Before narration, the post is sent to Google's Gemini API to fix typos and grammar and to write a title for the video.
 
 ## How it works
 
-1. **Cleans up the text.** Removes Markdown formatting, links and trailing "Edit:" or "Update:" notes. Writes out `r/` and `u/` references ("the AskReddit subreddit"), expands common Reddit acronyms such as AITA and TIL, and replaces emoji with their names so the narrator can read them. Gemini 3.5 Flash Lite then corrects typos and grammar, following the instructions in `assets/rewrite_prompt.txt`.
+1. **Cleans up the text.** Removes Markdown formatting, links and trailing "Edit:" or "Update:" notes. Writes out `r/` and `u/` references ("the AskReddit subreddit"), expands common Reddit acronyms such as AITA and TIL, and replaces emoji with their names so the narrator can read them. Gemini 3.5 Flash Lite then corrects typos and grammar, following the instructions in `assets/rewrite_prompt.txt`, and writes a title for the video.
 2. **Generates the narration.** Kokoro reads the cleaned text and records when each word is spoken.
 3. **Builds the captions.** Groups the words into short captions (three words by default, with a new caption after each sentence) that appear in time with the speech.
 4. **Assembles the video.** Cuts a random section of the gameplay footage to the length of the narration plus padding, then lays the captions and audio over it. The video keeps the footage's resolution and frame rate, and is encoded at a bitrate matched to both.
@@ -75,7 +75,7 @@ The post text is currently supplied by hand. This project was started before Red
    python autoyt.py
    ```
 
-The finished video is saved to `output_path` (`output.mp4` by default). It has the same resolution, aspect ratio and frame rate as the gameplay footage. The bitrate scales with the resolution and frame rate: about 50 Mbps, or 375 MB per minute, at 4K and 60 fps.
+The finished video is saved in the project folder and named after the title Gemini writes for the post, as `<title>.mp4`. Any `/` or `:` in the title becomes `-` in the filename. It has the same resolution, aspect ratio and frame rate as the gameplay footage. The bitrate scales with the resolution and frame rate: about 50 Mbps, or 375 MB per minute, at 4K and 60 fps.
 
 ## Configuration
 
@@ -87,7 +87,6 @@ All settings are in `config.json`. The file is not tracked by git, so local chan
     "speed": 1.0,
     "gameplay_path": "assets/minecraftparkourgameplay.mp4",
     "input_path": "input.txt",
-    "output_path": "output.mp4",
     "padding": 1,
     "words_per_caption": 3,
     "font": {
@@ -106,7 +105,6 @@ All settings are in `config.json`. The file is not tracked by git, so local chan
 | `speed` | How fast the narrator speaks. `1.0` is normal speed. |
 | `gameplay_path` | Path to the background video. |
 | `input_path` | Path to the text file containing the post. |
-| `output_path` | Where the finished video is saved. |
 | `padding` | Seconds of silence before and after the narration. |
 | `words_per_caption` | The most words shown on screen at once. A caption also ends after `.`, `?` or `!`. |
 | `font.path` | Path to a `.ttf` or `.otf` font file. The full path is required, since `~` is not expanded. |
@@ -129,7 +127,7 @@ AutoYT supports Kokoro's 28 English voices. `assets/voices.json` lists each voic
 
 ```
 AutoYT/
-├── autoyt.py                Entry point: loads the config and assembles the video with ffmpeg
+├── autoyt.py                Entry point: loads the config and runs each step in order
 ├── config.example.json      Default settings, copied to config.json
 ├── pyproject.toml           pytest settings
 ├── requirements.txt         Python dependencies
@@ -139,9 +137,10 @@ AutoYT/
 │   ├── rewrite_prompt.txt   Instructions sent to Gemini with each post
 │   └── profile_picture.png  Profile picture, not used yet
 ├── utils/
-│   ├── format.py            Text clean-up and Gemini rewrite
+│   ├── format_post.py       Text clean-up, Gemini rewrite and title
 │   ├── wav.py               Narration and word timings from Kokoro
-│   └── caption.py           Caption file (.ass) generation
+│   ├── caption.py           Caption file (.ass) generation
+│   └── video.py             Footage probing and video assembly with ffmpeg
 └── tests/                   pytest tests
 ```
 
@@ -155,11 +154,11 @@ Tests are in `tests/` and run with pytest from the project folder:
 pytest
 ```
 
-`pyproject.toml` adds the project folder to the import path, so tests can import `autoyt.py` and the modules in `utils/`. The text clean-up in `utils/format.py` is separated into `clean_text`, which makes no API calls. The test suite is in development.
+`pyproject.toml` adds the project folder to the import path, so tests can import `autoyt.py` and the modules in `utils/`. The text clean-up in `utils/format_post.py` is separated into `clean_text`, which makes no API calls. `tests/test_gemini_rewrite.py` does call the Gemini API, so it needs the key in `.env` and uses API quota each time it runs. The test suite is in development.
 
 ## Built with
 
 - [Kokoro](https://github.com/hexgrad/kokoro) for text-to-speech
 - [ffmpeg](https://ffmpeg.org) and [libass](https://github.com/libass/libass) for video encoding and captions
-- [Gemini API](https://ai.google.dev/gemini-api/docs) for fixing typos and grammar
+- [Gemini API](https://ai.google.dev/gemini-api/docs) for fixing typos and grammar and writing titles
 - [demoji](https://github.com/bsolomon1124/demoji) for emoji descriptions

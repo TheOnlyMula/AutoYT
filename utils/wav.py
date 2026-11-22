@@ -2,12 +2,9 @@ import wave
 import numpy as np
 from kokoro import KPipeline
 
-import utils.format as format
-
 SAMPLE_RATE = 24000  # Kokoro outputs 24 kHz audio
 
 def generate_tts_wav(text, voice, speed):
-    text = format.format_text(text)
     pipeline = KPipeline(lang_code = voice[0], repo_id = "hexgrad/Kokoro-82M")
 
     chunks, words = [], []
@@ -29,9 +26,9 @@ def generate_tts_wav(text, voice, speed):
     audio = np.concatenate(chunks)
     return audio, words
 
-def write_wav(path, audio): 
+def write_wav(path, audio):
     pcm = (np.clip(audio, -1.0, 1.0) * 32767).astype(np.int16)
-    with wave.open(str(path), "wb") as w: 
+    with wave.open(str(path), "wb") as w:
         w.setnchannels(1)
         w.setsampwidth(2)
         w.setframerate(SAMPLE_RATE)
